@@ -1,0 +1,184 @@
+<div class="">
+  <div class="border-bottom border-2 mb-2 bg-info fw-bold px-2">
+    Educational Background
+  </div>
+  <div class="eduContainer">
+    <div class="row eduRow mb-2">
+      <div class="col-lg-3 mb-2">
+        <label for="coursename-0">Course/Degree Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="coursename-0"
+          name="coursename-0"
+          placeholder="10th/12th/B.Tech/BCA..."
+        />
+      </div>
+      <div class="col-lg-4 mb-2">
+        <label for="coursename-0">College/School/Instituition Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="coursename-0"
+          name="coursename-0"
+          placeholder="School/College/Instituition"
+        />
+      </div>
+      <div class="col-lg-2 mb-2">
+        <label for="sessionStart-0">Session Start Year</label>
+        <input
+          type="text"
+          class="form-control"
+          id="sessionStart-0"
+          name="sessionStart-0"
+          placeholder="<%= new Date().getFullYear() - 3 %>"
+        />
+      </div>
+      <div class="col-lg-2 mb-2">
+        <label for="sessionEnd-0">Session End Year</label>
+        <input
+          type="text"
+          class="form-control"
+          id="sessionEnd-0"
+          name="sessionEnd-0"
+          placeholder="<%= new Date().getFullYear() %>"
+        />
+      </div>
+      <div
+        class="col-lg-1 d-flex justify-content-center align-items-center pt-3"
+      >
+        <!-- <label for="action">Action</label> -->
+        <button type="button" class="btn btn-danger fs-4 py-0 mx-1 eduDec-0" onclick="RemoveRows();">-</button>
+        <button type="button" class="btn btn-success fs-4 py-0 mx-1 eduInc-0" onclick="AddRows();">+</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+    function controlDec(){
+      const eduRowLenght = $('.eduContainer').children();
+      for (let index = 0; index < eduRowLenght.length; index++) {
+        if( eduRowLenght.length == 1 ){
+          $(`.eduDec-${index}`).css('display','none');
+        }else if(eduRowLenght.length > 0  &&   !($('.eduContainer').children().last().is(eduRowLenght[index]))){
+          $(`.eduDec-${index}`).css('display','none');
+        }else{
+          $(`.eduDec-${index}`).css('display','');
+        }
+      }
+    }
+    
+    function controlInc(){
+      const eduRowLenght = $('.eduContainer').children();
+      for (let index = 0; index < eduRowLenght.length; index++) {
+        if(eduRowLenght.length > 1 && eduRowLenght.length != index+1){
+          $(`.eduInc-${index}`).css("display","none");
+        }else{
+          $(`.eduInc-${index}`).css("display","");
+        }
+      }
+    }
+    
+    
+    $(document).ready(() => {
+      controlDec();
+      controlInc();
+    });
+    
+    // Delete Last Rows
+    function RemoveRows(){
+      $(".eduContainer").children().last().remove();
+      controlDec();
+      controlInc();
+    }
+    
+    // Add More Rows
+    function AddRows(){
+      $(document).ready(function(){
+        const eduRowLenght = $('.eduContainer').children();
+        const currentIndex = eduRowLenght.length;
+        
+        const wrapper = $(document.createElement("div"));
+        wrapper.addClass("row eduRow mb-2")
+      
+        const courseNameContainer = $(document.createElement('div')).addClass("col-lg-3 mb-2");
+        const collegeNameContainer = $(document.createElement('div')).addClass("col-lg-4 mb-2");
+        const sessionStartContainer = $(document.createElement('div')).addClass("col-lg-2 mb-2");
+        const sessionEndContainer = $(document.createElement('div')).addClass("col-lg-2 mb-2");
+        const buttonContainer = $(document.createElement('div')).addClass("col-lg-1 d-flex justify-content-center align-items-center pt-3");
+        
+        
+        courseNameContainer.after().html(
+          `
+            <label for="coursename.${currentIndex}">Course/Degree Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="coursename-${currentIndex}"
+              name="coursename-${currentIndex}"
+              placeholder="10th/12th/B.Tech/BCA..."
+            />
+          `
+        );
+        
+        collegeNameContainer.after().html(
+          `
+          <label for="coursename-${currentIndex}">College/School/Instituition Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="coursename-${currentIndex}"
+              name="coursename-${currentIndex}"
+              placeholder="School/College/Instituition"
+            /> 
+          `
+        );
+        
+        sessionStartContainer.after().html(
+          `
+            <label for="sessionStart-${currentIndex}">Session Start Year</label>
+            <input
+              type="text"
+              class="form-control"
+              id="sessionStart-${currentIndex}"
+              name="sessionStart-${currentIndex}"
+              placeholder="<%= new Date().getFullYear() - 3 %>"
+            />
+          `
+        );
+        
+        sessionEndContainer.after().html(
+          `
+            <label for="sessionEnd-${currentIndex}">Session End Year</label>
+            <input
+              type="text"
+              class="form-control"
+              id="sessionEnd-${currentIndex}"
+              name="sessionEnd-${currentIndex}"
+              placeholder="<%= new Date().getFullYear() %>"
+            />
+          `
+        );
+        
+        
+        buttonContainer.after().html(
+        `
+          <button type="button" class="btn btn-danger fs-4 py-0 mx-1 eduDec-${currentIndex}" onclick="RemoveRows();">-</button>
+          <button type="button" class="btn btn-success fs-4 py-0 mx-1 eduInc-${currentIndex}" onclick="AddRows();">+</button>
+          
+        `
+        );
+        wrapper.append(courseNameContainer);
+        wrapper.append(collegeNameContainer);
+        wrapper.append(sessionStartContainer);
+        wrapper.append(sessionEndContainer);
+        wrapper.append(buttonContainer);
+        $(".eduContainer").append(wrapper);
+        
+        controlInc();
+        controlDec();
+      });
+    }
+</script>

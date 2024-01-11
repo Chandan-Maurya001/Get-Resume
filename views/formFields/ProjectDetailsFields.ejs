@@ -1,0 +1,162 @@
+<div class="">
+  <div class="border-bottom border-2 mb-2 bg-info fw-bold px-2">
+    Projects/Open Source
+  </div>
+  <div class="proContainer">
+    <div class="row proRows mb-2">
+      <div class="col-lg-4 mb-2">
+        <label for="projectName-0">Project Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="projectName-0"
+          name="projectName-0"
+        />
+      </div>
+
+      <div class="col-lg-3 mb-2">
+        <label for="projectLink-0">Project Link</label>
+        <input
+          type="text"
+          class="form-control"
+          id="projectLink-0"
+          name="projectLink-0"
+        />
+      </div>
+
+      <div class="col-lg-4 mb-2">
+        <label for="projectDesc-0">Project Description</label>
+        <input
+          type="text"
+          class="form-control"
+          id="projectDesc-0"
+          name="projectDesc-0"
+        />
+      </div>
+
+      <div
+        class="col-lg-1 d-flex justify-content-center align-items-center pt-3"
+      >
+        <button type="button" class="btn btn-danger fs-4 py-0 mx-1 proDec-0" onclick="proDeleteRow();">-</button>
+        <button type="button" class="btn btn-success fs-4 py-0 mx-1 proInc-0" onclick="proAddRow();">+</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  function proControlDec() {
+    const proRowLength = $(".proContainer").children();
+    for (let index = 0; index < proRowLength.length; index++) {
+      if (proRowLength.length == 1) {
+        $(`.proDec-${index}`).css("display", "none");
+      } else if (
+        proRowLength.length > 0 &&
+        !$(".proContainer").children().last().is(proRowLength[index])
+      ) {
+        $(`.proDec-${index}`).css("display", "none");
+      } else {
+        $(`.proDec-${index}`).css("display", "");
+      }
+    }
+  }
+
+  function proControlInc() {
+    const proRowLength = $(".proContainer").children();
+    for (let index = 0; index < proRowLength.length; index++) {
+      if (proRowLength.length > 1 && proRowLength.length != index + 1) {
+        $(`.proInc-${index}`).css("display", "none");
+      } else {
+        $(`.proInc-${index}`).css("display", "");
+      }
+    }
+  }
+
+  $(document).ready(() => {
+    proControlDec();
+    proControlInc();
+  });
+
+  // delete last project row
+  function proDeleteRow() {
+    $(".proContainer").children().last().remove();
+    proControlDec();
+    proControlInc();
+  }
+
+  function proAddRow() {
+    $(document).ready(function () {
+      const proRowLength = $(".proContainer").children();
+      const currenTechIndex = proRowLength.length;
+
+      const proWrapper = $(document.createElement("div"));
+      proWrapper.addClass("row proRow mb-2");
+
+      const ProjectNameContainer = $(document.createElement("div")).addClass(
+        "col-lg-4 mb-2"
+      );
+      const ProjectLinkContainer = $(document.createElement("div")).addClass(
+        "col-lg-3 mb-2"
+      );
+      const ProjectDescContainer = $(document.createElement("div")).addClass(
+        "col-lg-4 mb-2"
+      );
+
+      const proButtonContainer = $(document.createElement("div")).addClass(
+        "col-lg-1 d-flex justify-content-center align-items-center pt-3"
+      );
+      
+      
+      ProjectNameContainer.after().html(
+        `
+          <label for="projectName-${currenTechIndex}">Project Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="projectName-${currenTechIndex}"
+            name="projectName-${currenTechIndex}"
+          />
+        `
+      );
+      
+      ProjectLinkContainer.after().html(
+        `
+          <label for="projectLink-${currenTechIndex}">Project Link</label>
+          <input
+            type="text"
+            class="form-control"
+            id="projectLink-${currenTechIndex}"
+            name="projectLink-${currenTechIndex}"
+          />
+        `
+      );
+      
+      ProjectDescContainer.after().html(
+        
+        `
+          <label for="projectDesc-${currenTechIndex}">Project Description</label>
+          <input
+            type="text"
+            class="form-control"
+            id="projectDesc-${currenTechIndex}"
+            name="projectDesc-${currenTechIndex}"
+          />
+        `
+      );
+      
+      proButtonContainer.after().html(
+        `
+          <button type="button" class="btn btn-danger fs-4 py-0 mx-1 proDec-${currenTechIndex}" onclick="proDeleteRow();" >-</button>
+          <button type="button" class="btn btn-success fs-4 py-0 mx-1 proInc-${currenTechIndex}" onclick="proAddRow();" >+</button>
+        `
+      );
+      
+      proWrapper.append(ProjectNameContainer);
+      proWrapper.append(ProjectLinkContainer);
+      proWrapper.append(ProjectDescContainer);
+      proWrapper.append(proButtonContainer);
+      $(".proContainer").append(proWrapper);
+      proControlDec();
+      proControlInc();
+    });
+  }
+</script>

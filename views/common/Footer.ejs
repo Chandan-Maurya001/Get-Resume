@@ -1,0 +1,23 @@
+
+    <!-- <script src="../../public/javascripts/script.js"></script> -->
+    <script>
+      $(document).ready(function(){
+        setTimeout(()=>{
+          $("#pageLoader").css("visibility","hidden");
+        },300);
+      });
+      $(document).ready(function(){
+        $(document.body).click(function(event){
+          if(!$.contains($('#customAlert'),event.target)){
+            $("#customAlert").css('display','none');
+          }
+        });
+        $(document.body).keypress(function(event){
+          if(event.key == "Enter"){
+            $("#customAlert").css('display','none');
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

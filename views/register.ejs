@@ -1,0 +1,171 @@
+<%- include("common/Header") %> <%- include("common/Navbar") %>
+
+<style>
+  @media screen and (min-width: 425px) {
+    #form-container {
+      margin-top: 35px !important;
+    }
+  }
+  @media screen and (min-width: 375px) {
+    #form-container {
+      margin-top: 45px !important;
+    }
+  }
+  @media screen and (max-width: 320px) {
+    #form-container {
+      margin-top: 45px !important;
+    }
+  }
+</style>
+
+<div
+  class="container d-flex justify-content-center align-items-start vh-100 pt-5"
+>
+  <div class="row">
+    <div class="col-lg-2 col-0"></div>
+    <div class="col-lg-8 col-12">
+      <div
+        class="card shadow m-lg-5 mt-md-5 mt-sm-5 mt-xs-5"
+        id="form-container"
+      >
+        <form class="p-5 row g-3" id="registerForm" method="post">
+          <div class="col-md-6 mb-2">
+            <label for="fname" class="form-label">First Name</label>
+            <input
+              type="text"
+              id="fname"
+              name="fname"
+              class="form-control"
+              maxlength="15"
+              onkeypress="return /[a-zA-Z]/i.test(event.key)"
+              oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+              onblur="javascript: this.value = this.value.replace(/[0-9]+/g,'');"
+              autocomplete="off"
+              required
+            />
+          </div>
+          <div class="col-md-6 mb-2">
+            <label for="lname" class="form-label">Last Name</label>
+            <input
+              type="text"
+              id="lname"
+              name="lname"
+              class="form-control"
+              maxlength="15"
+              onkeypress="return /[a-zA-Z]/i.test(event.key)"
+              oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+              onblur="javascript: this.value = this.value.replace(/[0-9]+/g,'');"
+              autocomplete="off"
+              required
+            />
+          </div>
+          <div class="col-md-6 mb-2">
+            <label for="username" class="form-label">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              class="form-control"
+              required
+            />
+          </div>
+          <div class="col-md-6 mb-2">
+            <label for="password" class="form-label">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              class="form-control"
+              maxlength="15"
+              onkeypress="return /^[a-zA-Z0-9$@#&%_]+$/.test(event.key)"
+              oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+              onblur="javascript: if(!/^[a-zA-Z0-9$@#&%_]*$/.test(this.value)) this.value = '';"
+              autocomplete="off"
+              required
+            />
+          </div>
+          <div class="col-12 text-center">
+            <button class="btn btn-primary" id="register-button" type="submit">
+              Register
+            </button>
+          </div>
+          <hr />
+          <div class="d-flex justify-content-center align-items-center">
+            <div class="mx-2">Already register?</div>
+            <div class="">
+              <a href="/user/login" class="text-primary text-decoration-none"
+                >Login</a
+              >
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="col-lg-2 col-0"></div>
+  </div>
+</div>
+
+<script>
+  // function showAlert(title, message) {
+  //   console.log(title, message);
+  //   $("#alertTitle").html(title);
+  //   $("#alertMessage").html(message);
+  //   $("#customAlert").css("display", "flex");
+  // }
+
+  $(document).ready(function () {
+    // const alert = new Alert();
+    $(document).on("submit", "#registerForm", function (event) {
+      event.preventDefault();
+      // alert.show();
+      if ($("#fname").value == "") return alert.show("Error","First Name can't be Empty");
+      // if ($("#fname").value.length <= 2) return alert("Invalid First Name");
+
+      if ($("#lname").value == "") return alert.show("Error","Last Name can't be Empty");
+      // if ($("#fname").value.length <= 2) return alert("Invalid Last Name");
+
+      if ($("#email").value == "") return alert.show("Error","Eamil can't be Empty");
+      // if ($("#email").value.length <= 10) return alert("Invalid Email");
+
+      if ($("#password").value == "") return alert.show("Error","Password can't be Empty");
+      // if ($("#password").value.length < 8) return alert("Invalid Password");
+
+      try {
+        let formData = {};
+        formData.fname = $("#fname").val();
+        formData.lname = $("#lname").val();
+        formData.email = $("#email").val();
+        formData.password = $("#password").val();
+        formData = JSON.stringify(formData);
+        Object.freeze(formData);
+        $.ajax({
+          url: `/user/register`,
+          method: "POST",
+          async: false,
+          cache: false,
+          contentType: "application/json",
+          processData: false,
+          data: formData,
+          success: function (data) {
+            if (data.data) {
+              // console.log(data.data);
+              // showAlert("Error", "Registration Successful");
+              alert.show("Error","Registration Successful");
+            }
+          },
+          error: function (error) {
+            console.log(error);
+            const message = error.message || "Registration Faild";
+            // showAlert("Error", message);
+            alert.show("Error",message);
+          },
+        });
+      } catch (error) {
+        // showAlert("Error", "Opps....");
+        alert.show("Error",String(error.message).substring(0,30) ||"Opps there is a error..." );
+      }
+    });
+  });
+</script>
+
+<%- include("common/Footer") %>

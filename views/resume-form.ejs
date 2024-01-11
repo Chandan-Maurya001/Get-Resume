@@ -1,0 +1,43 @@
+<%- include("common/Header") %> <%- include("common/Navbar") %>
+<style>
+  #resumeForm .form-control::-moz-placeholder {
+    font-size: .8rem !important;
+  }
+  #resumeForm .form-control:-ms-input-placeholder {
+    font-size: .8rem !important;
+  }
+  #resumeForm .form-control::-webkit-input-placeholder {
+    font-size: .8rem !important;
+  }
+  #resumeForm input{
+    font-size: .8rem !important;
+  }
+  #resumeForm label{
+    font-size: .8rem !important;
+  }
+
+</style>
+<div
+  class="container mb-5 d-flex justify-content-center align-items-start"
+>
+  <form class="row mt-2 shadow py-3 border rounded" style="font-size: .9rem !important;" id="resumeForm">
+    <div class="shadow px-2 pb-2 text-center d-flex align-items-center justify-content-center fs-4 mb-2">
+      Resume Form
+    </div>
+    <%- include('./formFields/PersonalDetailsFields') %>
+    <%- include('./formFields/EducationDetailsFields') %>
+    <%- include('./formFields/TechnicalDetailsFields') %>
+    <%- include('./formFields/ProjectDetailsFields') %>
+    
+    <div class="col-12 text-center">
+      <button type="submit" class="btn btn-primary" >Create</button>
+    </div>
+  </form>
+  </div>
+</div>
+
+<script>
+  // alert.show();
+</script>
+
+<%- include("common/Footer") %>

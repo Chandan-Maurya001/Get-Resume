@@ -1,0 +1,151 @@
+<div class="">
+  <div class="border-bottom border-2 mb-2 bg-info fw-bold px-2">
+    Technical Skills
+  </div>
+  <div class="techContainer">
+    <div class="row techRow mb-2">
+      <div class="col-lg-4 mb-2">
+        <label for="domain">Domain</label>
+        <input
+          type="text"
+          class="form-control"
+          id="domain-0"
+          name="domain-0"
+          placeholder="Programming Languages"
+        />
+      </div>
+
+      <div class="col-lg-7 mb-2">
+        <label for="skills">Skills</label>
+        <input
+          type="text"
+          class="form-control"
+          id="skills-0"
+          name="skills-0"
+          placeholder="Javascript,Java,C++,Python..."
+        />
+      </div>
+
+      <div
+        class="col-lg-1 d-flex justify-content-center align-items-center pt-3"
+      >
+        <!-- <label for="action">Action</label> -->
+        <button type="button" class="btn btn-danger fs-4 py-0 mx-1 techDec-0" onclick="techDeleteLastRows();">
+          -
+        </button>
+        <button type="button" class="btn btn-success fs-4 py-0 mx-1 techInc-0" onclick="techAddRows();">
+          +
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function techControlDec() {
+    const techRowLength = $(".techContainer").children();
+    for (let index = 0; index < techRowLength.length; index++) {
+      if (techRowLength.length == 1) {
+        $(`.techDec-${index}`).css("display", "none");
+      } else if (
+        techRowLength.length > 0 &&
+        !$(".techContainer").children().last().is(techRowLength[index])
+      ) {
+        $(`.techDec-${index}`).css("display", "none");
+      } else {
+        $(`.techDec-${index}`).css("display", "");
+      }
+    }
+  }
+
+  function techControlInc() {
+    const techRowLength = $(".techContainer").children();
+    for (let index = 0; index < techRowLength.length; index++) {
+      if (techRowLength.length > 1 && techRowLength.length != index + 1) {
+        $(`.techInc-${index}`).css("display", "none");
+      } else {
+        $(`.techInc-${index}`).css("display", "");
+      }
+    }
+  }
+
+  $(document).ready(() => {
+    techControlDec();
+    techControlInc();
+  });
+
+  // Delete Rows
+  function techDeleteLastRows() {
+    $(".techContainer").children().last().remove();
+    techControlDec();
+    techControlInc();
+  }
+
+  // Add Rows
+  function techAddRows() {
+    $(document).ready(() => {
+      const techRowLength = $(".techContainer").children();
+      const currenTechIndex = techRowLength.length;
+
+      // creating nodes
+      const techWrapper = $(document.createElement("div"));
+      techWrapper.addClass("row techRow mb-2");
+
+      const DomainNameContainer = $(document.createElement("div")).addClass(
+        "col-lg-4 mb-2"
+      );
+      const SkillsNameContainer = $(document.createElement("div")).addClass(
+        "col-lg-7 mb-2"
+      );
+      const techButtonContainer = $(document.createElement("div")).addClass(
+        "col-lg-1 d-flex justify-content-center align-items-center pt-3"
+      );
+
+      DomainNameContainer.after().html(
+        `
+          <label for="domain-${currenTechIndex}">Domain</label>
+          <input
+            type="text"
+            class="form-control"
+            id="domain-${currenTechIndex}"
+            name="domain-${currenTechIndex}"
+            placeholder="Programming Languages"
+          />
+            
+        `
+      );
+      
+      SkillsNameContainer.after().html(
+        `
+          <label for="skills-${currenTechIndex}">Skills</label>
+          <input
+            type="text"
+            class="form-control"
+            id="skills-${currenTechIndex}"
+            name="skills-${currenTechIndex}"
+            placeholder="Javascript,Java,C++,Python..."
+          />
+        `
+      );
+      
+      techButtonContainer.after().html(
+      `
+        <button type="button" class="btn btn-danger fs-4 py-0 mx-1 techDec-${currenTechIndex}" onclick="techDeleteLastRows();">
+          -
+        </button>
+        <button type="button" class="btn btn-success fs-4 py-0 mx-1 techInc-${currenTechIndex}" onclick="techAddRows();">
+          +
+        </button>
+      `
+      );
+      
+      techWrapper.append(DomainNameContainer);
+      techWrapper.append(SkillsNameContainer);
+      techWrapper.append(techButtonContainer);
+      $(".techContainer").append(techWrapper);
+      
+      techControlDec();
+      techControlInc();
+    });
+  }
+</script>

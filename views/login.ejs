@@ -1,0 +1,65 @@
+<%- include("common/Header") %> <%- include("common/Navbar") %>
+<style>
+  @media screen and (min-width: 425px) {
+    #form-container {
+      margin-top: 35px !important;
+    }
+  }
+  @media screen and (min-width: 375px) {
+    #form-container {
+      margin-top: 45px !important;
+    }
+  }
+  @media screen and (max-width: 320px) {
+    #form-container {
+      margin-top: 45px !important;
+    }
+  }
+</style>
+
+<div
+  class="container d-flex justify-content-center align-items-start vh-100 pt-5"
+>
+  <div
+        class="card shadow m-lg-5 mt-md-5 mt-sm-5 mt-xs-5"
+        id="form-container"
+      >
+        <form class="p-5" method="post" action="/user/login">
+          <div class="mb-2">
+            <label for="username" class="form-label">Email</label>
+            <input
+              type="email"
+              id="username"
+              name="username"
+              class="form-control"
+            />
+          </div>
+          <div class="mb-2">
+            <label for="password" class="form-label">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              class="form-control"
+            />
+          </div>
+          <div class="text-center">
+            <button class="btn btn-primary">Login</button>
+          </div>
+          <hr />
+          <div class="d-flex justify-content-center align-items-center">
+            <div class="mx-2">New User?</div>
+            <div class="">
+              <a href="/user/register" class="text-primary text-decoration-none">Register</a>
+            </div>
+          </div>
+          <div class="d-flex justify-content-center align-items-center">
+            <div class="mx-2">Forgot Password?</div>
+            <div class="">
+              <a href="/user/reset-password" class="text-danger text-decoration-none">Reset</a>
+            </div>
+          </div>
+        </form>
+      </div>
+</div>
+<%- include("common/Footer") %>

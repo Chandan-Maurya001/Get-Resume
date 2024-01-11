@@ -1,0 +1,87 @@
+<div class="">
+  <div class="border-bottom border-2 mb-2 bg-info fw-bold px-2">
+    Personal Details
+  </div>
+  <div class="perContainer">
+    <div class="row perRow mb-2">
+      <div class="col-lg-2 mb-2">
+        <label for="fname" style="font-size: .9rem;">First Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="fname"
+          name="fname"
+          placeholder="First Name"
+          maxlength="15"
+          onkeypress="return /[a-zA-Z]/i.test(event.key)"
+          oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+          onblur="javascript: this.value = this.value.replace(/[0-9]+/g,'');"
+        />
+      </div>
+      <div class="col-lg-2 mb-2">
+        <label for="mname">Middle Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="mname"
+          name="mname"
+          placeholder="Middle Name"
+          maxlength="15"
+          onkeypress="return /[a-zA-Z]/i.test(event.key)"
+          oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+          onblur="javascript: this.value = this.value.replace(/[0-9]+/g,'');"
+        />
+      </div>
+      <div class="col-lg-2 mb-2">
+        <label for="lname">Last Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="lname"
+          name="lname"
+          placeholder="Last Name"
+          maxlength="15"
+          onkeypress="return /[a-zA-Z]/i.test(event.key)"
+          oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+          onblur="javascript: this.value = this.value.replace(/[0-9]+/g,'');"
+        />
+      </div>
+
+      <div class="col-lg-2 mb-2">
+        <label for="contact">Contact</label>
+        <input
+          type="text"
+          class="form-control"
+          id="contact"
+          name="contact"
+          placeholder="0123456789"
+          maxlength="10"
+          onkeypress="return /[0-9]/i.test(event.key)"
+          oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+          onblur="javascript:  if(!(/[0-9]/i.test(this.value))) this.value = ''"
+        />
+      </div>
+      <div class="col-lg-4 mb-2">
+        <label for="email">Email</label>
+        <input
+          type="email"
+          class="form-control"
+          id="email"
+          name="email"
+          placeholder="email@example.com"
+          required
+        />
+      </div>
+      <div class="col-lg-4 mb-2">
+        <label for="address">Address</label>
+        <input
+          type="address"
+          class="form-control"
+          id="address"
+          name="address"
+          placeholder="village/city/town,state,pincode"
+        />
+      </div>
+    </div>
+  </div>
+</div>
