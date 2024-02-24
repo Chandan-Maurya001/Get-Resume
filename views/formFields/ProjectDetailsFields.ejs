@@ -14,7 +14,7 @@
         />
       </div>
 
-      <div class="col-lg-3 mb-2">
+      <div class="col-lg-7 mb-2">
         <label for="projectLink-0">Project Link</label>
         <input
           type="text"
@@ -24,14 +24,9 @@
         />
       </div>
 
-      <div class="col-lg-4 mb-2">
+      <div class="col-lg-11 mb-2">
         <label for="projectDesc-0">Project Description</label>
-        <input
-          type="text"
-          class="form-control"
-          id="projectDesc-0"
-          name="projectDesc-0"
-        />
+        <textarea name="projectDesc-0" id="projectDesc-0" cols="30" rows="3" class="form-control"></textarea>
       </div>
 
       <div
@@ -95,16 +90,15 @@
         "col-lg-4 mb-2"
       );
       const ProjectLinkContainer = $(document.createElement("div")).addClass(
-        "col-lg-3 mb-2"
+        "col-lg-7 mb-2"
       );
       const ProjectDescContainer = $(document.createElement("div")).addClass(
-        "col-lg-4 mb-2"
+        "col-lg-11 mb-2"
       );
 
       const proButtonContainer = $(document.createElement("div")).addClass(
         "col-lg-1 d-flex justify-content-center align-items-center pt-3"
       );
-      
       
       ProjectNameContainer.after().html(
         `
@@ -134,12 +128,7 @@
         
         `
           <label for="projectDesc-${currenTechIndex}">Project Description</label>
-          <input
-            type="text"
-            class="form-control"
-            id="projectDesc-${currenTechIndex}"
-            name="projectDesc-${currenTechIndex}"
-          />
+          <textarea name="projectDesc-${currenTechIndex}" id="projectDesc-${currenTechIndex}" cols="30" rows="3" class="form-control"></textarea>
         `
       );
       

@@ -1,0 +1,212 @@
+<div class="">
+  <div class="border-bottom border-2 mb-2 bg-info fw-bold px-2">Experience</div>
+  <div class="experContainer">
+    <div class="row proRows mb-2">
+      <div class="col-lg-3 mb-2">
+        <label for="role-0">Role</label>
+        <input type="text" class="form-control" id="role-0" name="role-0" />
+      </div>
+
+      <div class="col-lg-4 mb-2">
+        <label for="projectLink-0">Compnay Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="companyName-0"
+          name="companyName-0"
+        />
+      </div>
+      <div class="col-lg-2 mb-2">
+        <label for="startDate-0">Start</label>
+        <input
+          type="text"
+          class="form-control"
+          id="startDate-0"
+          name="startDate-0"
+        />
+      </div>
+      <div class="col-lg-2 mb-2">
+        <label for="endDate-0">End</label>
+        <input
+          type="text"
+          class="form-control"
+          id="endDate-0"
+          name="endDate-0"
+        />
+      </div>
+
+      <div class="col-lg-11 mb-2">
+        <label for="experDesc-0">Project Description</label>
+        <textarea
+          name="experDesc-0"
+          id="experDesc-0"
+          cols="30"
+          rows="3"
+          class="form-control"
+        ></textarea>
+      </div>
+
+      <div
+        class="col-lg-1 d-flex justify-content-center align-items-center pt-3"
+      >
+        <button
+          type="button"
+          class="btn btn-danger fs-4 py-0 mx-1 experDec-0"
+          onclick="experDeleteRow();"
+        >
+          -
+        </button>
+        <button
+          type="button"
+          class="btn btn-success fs-4 py-0 mx-1 experInc-0"
+          onclick="experAddRow();"
+        >
+          +
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  function experControlDec() {
+    const proRowLength = $(".experContainer").children();
+    for (let index = 0; index < proRowLength.length; index++) {
+      if (proRowLength.length == 1) {
+        $(`.experDec-${index}`).css("display", "none");
+      } else if (
+        proRowLength.length > 0 &&
+        !$(".experContainer").children().last().is(proRowLength[index])
+      ) {
+        $(`.experDec-${index}`).css("display", "none");
+      } else {
+        $(`.experDec-${index}`).css("display", "");
+      }
+    }
+  }
+
+  function experControlInc() {
+    const proRowLength = $(".proContainer").children();
+    for (let index = 0; index < proRowLength.length; index++) {
+      if (proRowLength.length > 1 && proRowLength.length != index + 1) {
+        $(`.proInc-${index}`).css("display", "none");
+      } else {
+        $(`.proInc-${index}`).css("display", "");
+      }
+    }
+  }
+
+  $(document).ready(() => {
+    experControlDec();
+    experControlInc();
+  });
+
+  // delete last project row
+  function experDeleteRow() {
+    $(".experContainer").children().last().remove();
+    experControlDec();
+    experControlInc();
+  }
+
+  function experAddRow() {
+    $(document).ready(function () {
+      const proRowLength = $(".experContainer").children();
+      const currenTechIndex = proRowLength.length;
+
+      const experWrapper = $(document.createElement("div"));
+      experWrapper.addClass("row proRow mb-2");
+
+      const RoleNameContainer = $(document.createElement("div")).addClass(
+        "col-lg-3 mb-2"
+      );
+      const CompanyNameContainer = $(document.createElement("div")).addClass(
+        "col-lg-4 mb-2"
+      );
+      const StartDateContainer = $(document.createElement("div")).addClass(
+        "col-lg-2 mb-2"
+      );
+      const EndDateContainer = $(document.createElement("div")).addClass(
+        "col-lg-2 mb-2"
+      );
+      const preDescContainer = $(document.createElement("div")).addClass(
+        "col-lg-11 mb-2"
+      );
+
+      const proButtonContainer = $(document.createElement("div")).addClass(
+        "col-lg-1 d-flex justify-content-center align-items-center pt-3"
+      );
+
+      RoleNameContainer.after().html(
+        `
+          <label for="role-${currenTechIndex}">Role</label>
+          <input
+            type="text"
+            class="form-control"
+            id="role-${currenTechIndex}"
+            name="role-${currenTechIndex}"
+          />
+        `
+      );
+      
+      CompanyNameContainer.after().html(
+        `
+          <label for="companyName-${currenTechIndex}">Compnay Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="companyName-${currenTechIndex}"
+            name="companyName-${currenTechIndex}"
+          />
+        `
+      );
+
+      StartDateContainer.after().html(
+        `
+          <label for="startDate-${currenTechIndex}">Start</label>
+          <input
+            type="text"
+            class="form-control"
+            id="startDate-${currenTechIndex}"
+            name="startDate-${currenTechIndex}"
+          />
+        `
+      );
+      
+      EndDateContainer.after().html(
+        `
+          <label for="endDate-${currenTechIndex}">End</label>
+          <input
+            type="text"
+            class="form-control"
+            id="endDate-${currenTechIndex}"
+            name="endDate-${currenTechIndex}"
+          />
+        `
+      );
+      
+      
+      preDescContainer.after().html(
+        `
+          <label for="projectDesc-${currenTechIndex}">Project Description</label>
+          <textarea name="projectDesc-${currenTechIndex}" id="projectDesc-${currenTechIndex}" cols="30" rows="3" class="form-control"></textarea>
+        `
+      );
+
+      proButtonContainer.after().html(
+        `
+          <button type="button" class="btn btn-danger fs-4 py-0 mx-1 experDec-${currenTechIndex}" onclick="experDeleteRow();" >-</button>
+          <button type="button" class="btn btn-success fs-4 py-0 mx-1 experInc-${currenTechIndex}" onclick="experAddRow();" >+</button>
+        `
+      );
+
+      experWrapper.append(CompanyNameContainer);
+      experWrapper.append(RoleNameContainer);
+      experWrapper.append(StartDateContainer);
+      experWrapper.append(EndDateContainer);
+      experWrapper.append(preDescContainer);
+      experWrapper.append(proButtonContainer);
+      $(".experContainer").append(experWrapper);
+      experControlDec();
+      experControlInc();
+    });
+  }
+</script>

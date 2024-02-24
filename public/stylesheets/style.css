@@ -6,3 +6,10 @@ body {
 a {
   color: #00B7FF;
 }
+
+
+
+.centerElementInMaxHight {
+  min-height: 100vh;
+
+}

@@ -1,6 +1,8 @@
 const sequelize = require("../config/db");
 const { DataTypes} = require("sequelize");
 const Users = require("./Users");
+const Resume = require("./Resume");
+
 
 const TechSkills = sequelize.define(
   "TechSkills",
@@ -19,8 +21,10 @@ const TechSkills = sequelize.define(
   }
 );
 
-Users.hasMany(TechSkills, { as: "techskills", onDelete: "CASCADE" });
-TechSkills.belongsTo(Users);
+// Users.hasMany(TechSkills, { as: "techskills", onDelete: "CASCADE" });
+// TechSkills.belongsTo(Users);
+Resume.hasOne(TechSkills, { as: "techskills", onDelete: "CASCADE" });
+TechSkills.belongsTo(Resume);
 
 module.exports = TechSkills;
 

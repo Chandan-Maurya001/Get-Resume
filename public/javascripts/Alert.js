@@ -42,7 +42,7 @@ class Alert {
   #AlertMessage;
 
   constructor(
-    title = "Error",
+    title = "Title",
     message = "some error message",
     bgColor = "blue"
   ) {

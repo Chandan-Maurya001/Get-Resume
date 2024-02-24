@@ -93,9 +93,26 @@ const login = async (req, res, next) => {
   }
 };
 
+const logout = async (req, res, next) => {
+  try {
+    req.session.destroy(error => {
+      if (error) {
+        return next(error);
+      }
+      console.log(req.originalUrl);
+      res.clearCookie("__getresuem");
+      return res.redirect("/user/login");
+    });
+  } catch (error) {
+    next(error);
+  }
+}
+
+
 module.exports = {
   register,
   getRegister,
   getLogin,
   login,
+  logout,
 };

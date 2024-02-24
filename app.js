@@ -80,7 +80,7 @@ app.use(function (err, req, res, next) {
 
 // connecting to db
 sequelize
-  .sync({ logging: true, force:false}) // set force true if any table updated!
+  .sync({ logging: true, force: false, alter: false }) // set force true if any table updated!
   .then(() => console.log("Connected to database"))
   .catch((error) => {
     throw error;

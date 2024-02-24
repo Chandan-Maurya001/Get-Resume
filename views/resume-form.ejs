@@ -18,16 +18,18 @@
 
 </style>
 <div
-  class="container mb-5 d-flex justify-content-center align-items-start"
+  class="container mb-5 d-flex justify-content-center align-items-center centerELementInDiv"
+  id="mainContainer"
 >
-  <form class="row mt-2 shadow py-3 border rounded" style="font-size: .9rem !important;" id="resumeForm">
-    <div class="shadow px-2 pb-2 text-center d-flex align-items-center justify-content-center fs-4 mb-2">
+  <form class="row  shadow py-3 border rounded" style="font-size: .9rem !important;" id="resumeForm">
+    <div class=" px-2 pb-2 text-center d-flex align-items-center justify-content-center fs-4 mb-2">
       Resume Form
     </div>
     <%- include('./formFields/PersonalDetailsFields') %>
     <%- include('./formFields/EducationDetailsFields') %>
     <%- include('./formFields/TechnicalDetailsFields') %>
     <%- include('./formFields/ProjectDetailsFields') %>
+    <%- include('./formFields/ExperienceDetilsFields') %>
     
     <div class="col-12 text-center">
       <button type="submit" class="btn btn-primary" >Create</button>

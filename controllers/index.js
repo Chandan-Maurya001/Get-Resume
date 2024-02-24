@@ -1,6 +1,6 @@
 const { home, getResumeForm, createResume } = require("./app");
 
-const { register, getRegister, getLogin, login } = require("./user");
+const { register, getRegister, getLogin, login, logout } = require("./user");
 
 
 module.exports = {
@@ -11,4 +11,5 @@ module.exports = {
   getRegister,
   getLogin,
   login,
+  logout,
 };
